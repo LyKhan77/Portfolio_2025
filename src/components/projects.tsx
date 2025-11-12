@@ -4,8 +4,8 @@ import { Badge } from "./ui/badge";
 import { ExternalLink, Github, Figma, FileText, Filter } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useState } from "react";
-import { projects, getAllCategories, type Project } from "../data/portfolio-data";
-import { Link } from "react-router-dom"; // ADD THIS LINE
+import { projects, getAllCategories, projectAssets, type Project } from "../data/portfolio-data";
+import { Link } from "react-router-dom";
 
 export function Projects() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
@@ -15,16 +15,11 @@ export function Projects() {
     ? projects 
     : projects.filter(p => p.category === activeCategory);
 
-  // Placeholder images for projects (you can replace these with actual images)
-  const getProjectImage = (category: Project['category']) => {
-    switch (category) {
-      case "Computer Vision":
-        return "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&h=600&fit=crop"; // AI/Computer vision themed
-      case "UI/UX Design":
-        return "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop"; // Design themed
-      default:
-        return "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop"; // Tech themed
+  const getProjectImage = (project: Project) => {
+    if (project.category === "Computer Vision") {
+      return "https://plus.unsplash.com/premium_photo-1676637656166-cb7b3a43b81a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1032";
     }
+    return projectAssets[project.imageKey].thumbnail;
   };
 
   return (
@@ -55,12 +50,12 @@ export function Projects() {
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((project) => (
-            <Link key={project.id} to={`/projects/${project.id}`} className="flex flex-col hover:shadow-lg transition-all hover:scale-[1.02] duration-300"> {/* WRAP WITH LINK */}
-              <Card className="flex flex-col h-full"> {/* ADD h-full to Card */}
+            <Card key={project.id} className="flex flex-col h-full hover:shadow-lg transition-all hover:scale-[1.02] duration-300">
+              <Link to={`/projects/${project.id}`} className="flex flex-col flex-1">
                 <CardHeader className="p-0">
                   <div className="aspect-video bg-muted rounded-t-lg overflow-hidden relative group">
                     <ImageWithFallback
-                      src={getProjectImage(project.category)}
+                      src={getProjectImage(project)}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-300"
                     />
@@ -85,42 +80,42 @@ export function Projects() {
                     )}
                   </div>
                 </CardContent>
-                <CardFooter className="gap-2 pt-0 flex-wrap">
-                  {project.github && (
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="mr-2 h-4 w-4" />
-                        Code
-                      </a>
-                    </Button>
-                  )}
-                  {project.figma && (
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={project.figma} target="_blank" rel="noopener noreferrer">
-                        <Figma className="mr-2 h-4 w-4" />
-                        Figma
-                      </a>
-                    </Button>
-                  )}
-                  {project.demo && (
-                    <Button size="sm" asChild>
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="mr-2 h-4 w-4" />
-                        Demo
-                      </a>
-                    </Button>
-                  )}
-                  {project.documentation && (
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={project.documentation} target="_blank" rel="noopener noreferrer">
-                        <FileText className="mr-2 h-4 w-4" />
-                        Docs
-                      </a>
-                    </Button>
-                  )}
-                </CardFooter>
-              </Card>
-            </Link>
+              </Link>
+              <CardFooter className="gap-2 pt-0 flex-wrap">
+                {project.github && (
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                      <Github className="mr-2 h-4 w-4" />
+                      Code
+                    </a>
+                  </Button>
+                )}
+                {project.figma && (
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={project.figma} target="_blank" rel="noopener noreferrer">
+                      <Figma className="mr-2 h-4 w-4" />
+                      Figma
+                    </a>
+                  </Button>
+                )}
+                {project.demo && (
+                  <Button size="sm" asChild>
+                    <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      Demo
+                    </a>
+                  </Button>
+                )}
+                {project.documentation && (
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={project.documentation} target="_blank" rel="noopener noreferrer">
+                      <FileText className="mr-2 h-4 w-4" />
+                      Docs
+                    </a>
+                  </Button>
+                )}
+              </CardFooter>
+            </Card>
           ))}
         </div>
 

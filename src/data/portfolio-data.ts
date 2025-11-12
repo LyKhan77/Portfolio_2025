@@ -76,7 +76,7 @@ export const projectAssets = {
     figmaLink: "",
   },
   kbbSuperApp: {
-    thumbnail: "/images/kbb-superapp/1.png",
+    thumbnail: "/images/thumbnails/kbb_superapp.png",
     gallery: [
       "/images/kbb-superapp/1.png",
       "/images/kbb-superapp/2.png",
@@ -89,7 +89,7 @@ export const projectAssets = {
     ],
   },
   catatCuan: {
-    thumbnail: "/images/catat-cuan/1.png",
+    thumbnail: "/images/thumbnails/catat_cuan.png",
     gallery: [
       "/images/catat-cuan/1.png",
       "/images/catat-cuan/2.png",
@@ -102,7 +102,7 @@ export const projectAssets = {
     ],
   },
   diswayJkt: {
-    thumbnail: "/images/disway-jkt/1.png",
+    thumbnail: "/images/thumbnails/disway_jkt.png",
     gallery: [
       "/images/disway-jkt/1.png",
       "/images/disway-jkt/2.png",
@@ -115,7 +115,7 @@ export const projectAssets = {
     ],
   },
   rsuMedimas: {
-    thumbnail: "/images/rsu-medimas/1.png",
+    thumbnail: "/images/thumbnails/rsu_medimas.png",
     gallery: [
       "/images/rsu-medimas/1.png",
       "/images/rsu-medimas/2.png",
@@ -172,7 +172,7 @@ export const projects: Project[] = [
     title: "PPE Detection - Pertamina EP",
     category: "Computer Vision",
     description: "Developing a web-based application and implementing a computer vision model to detect workers wearing complete safety gear (such as helmet, coverall, and boots) on CCTV cameras at work sites managed by PT Pertamina EP. My responsibilities include creating a dataset, building an automatic detection system, and integrating the AI system into the existing CCTV infrastructure.",
-    technologies: ["Python", "OpenCV", "YOLO", "TensorFlow", "Deep Learning", "Web Dashboard (HTML,CSS,JS)", "CCTV Integration"],
+    technologies: ["Python", "OpenCV", "YOLO",  "Web Dashboard (HTML,CSS,JS)", "CCTV Integration"],
     imageKey: "ppeDetection",
     github: "", // Add your GitHub URL
     demo: "", // Add demo URL if available
@@ -260,7 +260,7 @@ export interface SkillCategory {
 export const skills: SkillCategory[] = [
   {
     category: "AI Engineer - Computer Vision",
-    skills: ["Python", "OpenCV", "TensorFlow", "YOLO", "MediaPipe", "Deep Learning", "Image Processing"],
+    skills: ["Python", "OpenCV", "TensorFlow", "YOLO", "MediaPipe", "Deep Learning", "Machine Learning", "Data Annotation", "Image Processing"],
   },
   {
     category: "UI/UX Design",
@@ -272,7 +272,7 @@ export const skills: SkillCategory[] = [
   },
   {
     category: "Other",
-    skills: ["Docker", "Git", "Linux", "CI/CD", "Agile"],
+    skills: ["Docker", "Git", "Linux",  "Agile"],
   },
 ];
 
