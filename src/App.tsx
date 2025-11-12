@@ -5,8 +5,9 @@ import { Skills } from "./components/skills";
 import { Projects } from "./components/projects";
 import { Contact } from "./components/contact";
 import { Navigation } from "./components/navigation";
-import { ProjectDetail } from "./components/project-detail"; // New import
+import { ProjectDetail } from "./components/project-detail";
 import { personalInfo } from "./data/portfolio-data";
+import { SectionWrapper } from "./components/section-wrapper";
 
 export default function App() {
   return (
@@ -19,10 +20,18 @@ export default function App() {
             element={
               <>
                 <Hero />
-                <About />
-                <Skills />
-                <Projects />
-                <Contact />
+                <SectionWrapper delay={0.2}>
+                  <About />
+                </SectionWrapper>
+                <SectionWrapper delay={0.3}>
+                  <Skills />
+                </SectionWrapper>
+                <SectionWrapper delay={0.4}>
+                  <Projects />
+                </SectionWrapper>
+                <SectionWrapper delay={0.5}>
+                  <Contact />
+                </SectionWrapper>
               </>
             }
           />
