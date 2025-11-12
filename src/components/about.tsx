@@ -34,12 +34,12 @@ export function About() {
           {highlights.map((item, index) => {
             const Icon = item.icon;
             return (
-              <Card key={index} className="p-6 text-center space-y-4 hover:shadow-lg transition-shadow">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
+              <Card key={index} className="p-6 text-center space-y-2 hover:shadow-lg transition-shadow">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mx-auto">
                   <Icon className="h-6 w-6 text-primary" />
                 </div>
-                <h3>{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
+                <h3 className="mt-2">{item.title}</h3>
+                <p className="text-muted-foreground mt-1">{item.description}</p>
               </Card>
             );
           })}

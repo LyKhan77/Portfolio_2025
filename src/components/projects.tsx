@@ -5,6 +5,7 @@ import { ExternalLink, Github, Figma, FileText, Filter } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useState } from "react";
 import { projects, getAllCategories, type Project } from "../data/portfolio-data";
+import { Link } from "react-router-dom"; // ADD THIS LINE
 
 export function Projects() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
@@ -54,70 +55,72 @@ export function Projects() {
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((project) => (
-            <Card key={project.id} className="flex flex-col hover:shadow-lg transition-all hover:scale-[1.02] duration-300">
-              <CardHeader className="p-0">
-                <div className="aspect-video bg-muted rounded-t-lg overflow-hidden relative group">
-                  <ImageWithFallback
-                    src={getProjectImage(project.category)}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-300"
-                  />
-                  <div className="absolute top-2 right-2">
-                    <Badge className="bg-primary/90 backdrop-blur-sm">
-                      {project.category}
-                    </Badge>
+            <Link key={project.id} to={`/projects/${project.id}`} className="flex flex-col hover:shadow-lg transition-all hover:scale-[1.02] duration-300"> {/* WRAP WITH LINK */}
+              <Card className="flex flex-col h-full"> {/* ADD h-full to Card */}
+                <CardHeader className="p-0">
+                  <div className="aspect-video bg-muted rounded-t-lg overflow-hidden relative group">
+                    <ImageWithFallback
+                      src={getProjectImage(project.category)}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-300"
+                    />
+                    <div className="absolute top-2 right-2">
+                      <Badge className="bg-primary/90 backdrop-blur-sm">
+                        {project.category}
+                      </Badge>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent className="flex-1 pt-6">
-                <CardTitle className="mb-2">{project.title}</CardTitle>
-                <CardDescription className="mb-4 line-clamp-3">{project.description}</CardDescription>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.slice(0, 4).map((tech, index) => (
-                    <Badge key={index} variant="outline">
-                      {tech}
-                    </Badge>
-                  ))}
-                  {project.technologies.length > 4 && (
-                    <Badge variant="outline">+{project.technologies.length - 4}</Badge>
+                </CardHeader>
+                <CardContent className="flex-1 pt-6">
+                  <CardTitle className="mb-2">{project.title}</CardTitle>
+                  <CardDescription className="mb-4 line-clamp-3">{project.description}</CardDescription>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.slice(0, 4).map((tech, index) => (
+                      <Badge key={index} variant="outline">
+                        {tech}
+                      </Badge>
+                    ))}
+                    {project.technologies.length > 4 && (
+                      <Badge variant="outline">+{project.technologies.length - 4}</Badge>
+                    )}
+                  </div>
+                </CardContent>
+                <CardFooter className="gap-2 pt-0 flex-wrap">
+                  {project.github && (
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={project.github} target="_blank" rel="noopener noreferrer">
+                        <Github className="mr-2 h-4 w-4" />
+                        Code
+                      </a>
+                    </Button>
                   )}
-                </div>
-              </CardContent>
-              <CardFooter className="gap-2 pt-0 flex-wrap">
-                {project.github && (
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="mr-2 h-4 w-4" />
-                      Code
-                    </a>
-                  </Button>
-                )}
-                {project.figma && (
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={project.figma} target="_blank" rel="noopener noreferrer">
-                      <Figma className="mr-2 h-4 w-4" />
-                      Figma
-                    </a>
-                  </Button>
-                )}
-                {project.demo && (
-                  <Button size="sm" asChild>
-                    <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                      Demo
-                    </a>
-                  </Button>
-                )}
-                {project.documentation && (
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={project.documentation} target="_blank" rel="noopener noreferrer">
-                      <FileText className="mr-2 h-4 w-4" />
-                      Docs
-                    </a>
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
+                  {project.figma && (
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={project.figma} target="_blank" rel="noopener noreferrer">
+                        <Figma className="mr-2 h-4 w-4" />
+                        Figma
+                      </a>
+                    </Button>
+                  )}
+                  {project.demo && (
+                    <Button size="sm" asChild>
+                      <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Demo
+                      </a>
+                    </Button>
+                  )}
+                  {project.documentation && (
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={project.documentation} target="_blank" rel="noopener noreferrer">
+                        <FileText className="mr-2 h-4 w-4" />
+                        Docs
+                      </a>
+                    </Button>
+                  )}
+                </CardFooter>
+              </Card>
+            </Link>
           ))}
         </div>
 
